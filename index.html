@@ -18,11 +18,11 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            perspective: 2000px; /* Perspectiva 3D global */
+            perspective: 2500px; /* Perspectiva más profunda para 3D realista */
             position: relative;
         }
 
-        /* Fondo de corazones flotantes */
+        /* Fondo de corazones flotantes mejorados */
         .hearts-background {
             position: absolute;
             top: 0;
@@ -35,63 +35,68 @@
 
         .heart {
             position: absolute;
-            font-size: 24px;
+            font-size: 28px;
             color: #ff69b4;
-            opacity: 0.6;
-            animation: float 15s infinite ease-in-out;
+            opacity: 0.7;
+            animation: floatAdvanced 18s infinite ease-in-out;
+            filter: blur(1px); /* Suavizado para realismo */
         }
 
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.6; }
-            50% { transform: translateY(-30px) rotate(15deg) scale(1.1); opacity: 0.9; }
-            100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.6; }
+        @keyframes floatAdvanced {
+            0% { transform: translateY(0) translateZ(0) rotate(0deg) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-40px) translateZ(20px) rotate(20deg) scale(1.2); opacity: 1; }
+            100% { transform: translateY(0) translateZ(0) rotate(0deg) scale(1); opacity: 0.7; }
         }
 
-        /* Corazones cayendo con variación */
+        /* Corazones cayendo con más realismo */
         .falling-heart {
             position: absolute;
-            font-size: 28px;
+            font-size: 32px;
             color: #e91e63;
-            animation: fall 6s linear infinite;
+            animation: fallAdvanced 7s linear infinite;
             pointer-events: none;
-            opacity: 0.8;
+            opacity: 0.9;
+            filter: blur(0.5px);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(-100vh) rotate(0deg) translateX(0); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg) translateX(20px); opacity: 0; }
+        @keyframes fallAdvanced {
+            0% { transform: translateY(-100vh) translateZ(-50px) rotate(0deg) translateX(0); opacity: 1; }
+            100% { transform: translateY(100vh) translateZ(50px) rotate(1080deg) translateX(30px); opacity: 0; }
         }
 
         #title {
             font-family: 'Great Vibes', cursive;
-            font-size: 52px;
+            font-size: 56px;
             color: #d81b60;
             text-align: center;
-            margin-bottom: 60px;
-            animation: fadeInTitle 2.5s ease-in-out;
+            margin-bottom: 70px;
+            animation: fadeInTitle 3s ease-in-out;
             z-index: 10;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+            transform-style: preserve-3d;
         }
 
         @keyframes fadeInTitle {
-            0% { opacity: 0; transform: translateY(-100px) rotateX(30deg); }
-            100% { opacity: 1; transform: translateY(0) rotateX(0deg); }
+            0% { opacity: 0; transform: translateY(-150px) rotateX(45deg) translateZ(-200px); }
+            100% { opacity: 1; transform: translateY(0) rotateX(0deg) translateZ(0); }
         }
 
-        /* Sobre 3D realista */
+        /* Sobre 3D ultra realista */
         #envelope-container {
             position: relative;
-            width: 350px;
-            height: 250px;
+            width: 400px;
+            height: 280px;
             transform-style: preserve-3d;
-            animation: flyInAdvanced 4s ease-in-out forwards;
+            animation: flyInUltra 5s ease-in-out forwards; /* Más lento y detallado */
             cursor: pointer;
             z-index: 5;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); /* Sombra realista */
         }
 
-        @keyframes flyInAdvanced {
-            0% { transform: translateX(-150vw) translateZ(-500px) rotateY(-45deg) rotateX(20deg) rotateZ(10deg); opacity: 0; }
-            50% { transform: translateX(0) translateZ(200px) rotateY(180deg) rotateX(-10deg) rotateZ(-5deg); opacity: 1; }
+        @keyframes flyInUltra {
+            0% { transform: translateX(-200vw) translateZ(-800px) rotateY(-60deg) rotateX(30deg) rotateZ(15deg); opacity: 0; }
+            40% { transform: translateX(0) translateZ(300px) rotateY(240deg) rotateX(-15deg) rotateZ(-10deg); opacity: 1; }
+            70% { transform: translateX(0) translateZ(100px) rotateY(420deg) rotateX(5deg) rotateZ(5deg); }
             100% { transform: translateX(0) translateZ(0) rotateY(360deg) rotateX(0deg) rotateZ(0deg); opacity: 1; }
         }
 
@@ -100,67 +105,69 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            transition: transform 1.5s ease-in-out;
+            transition: transform 2s cubic-bezier(0.25, 0.1, 0.25, 1); /* Curva suave para realismo */
         }
 
-        /* Partes del sobre */
+        /* Partes del sobre con texturas */
         .envelope-face {
             position: absolute;
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            background-color: #f8bbd0; /* Rosa suave */
-            border: 1px solid #ec407a;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background: linear-gradient(to bottom, #f8bbd0, #f48fb1); /* Gradiente para textura papel */
+            border: 2px solid #ec407a;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1); /* Textura interna */
         }
 
-        .front { transform: rotateY(0deg) translateZ(1px); } /* Frente */
-        .back { transform: rotateY(180deg) translateZ(-1px); background-color: #f48fb1; } /* Espalda */
+        .front { transform: rotateY(0deg) translateZ(2px); } /* Frente con profundidad */
+        .back { transform: rotateY(180deg) translateZ(-2px); background: linear-gradient(to bottom, #f48fb1, #f8bbd0); }
 
         #flap {
             position: absolute;
-            top: -125px;
+            top: 0; /* Flap en la parte superior para sobre cerrado estándar 💌 */
             left: 0;
-            width: 350px;
-            height: 125px;
-            background-color: #f8bbd0;
-            clip-path: polygon(0 100%, 50% 0, 100% 100%);
-            transform-origin: bottom;
+            width: 400px;
+            height: 140px; /* Mitad para tapa */
+            background: linear-gradient(to top, #f8bbd0, #fce4ec);
+            clip-path: polygon(0 0, 50% 100%, 100% 0); /* Forma triangular invertida para flap real */
+            transform-origin: top;
             transform: rotateX(0deg);
-            transition: transform 1.2s ease-in-out;
-            border-bottom: 1px solid #ec407a;
+            transition: transform 1.5s ease-in-out;
+            border: 2px solid #ec407a;
+            border-top: none;
             backface-visibility: hidden;
-            z-index: 2;
+            z-index: 3; /* Encima del frente */
         }
 
-        /* Alas realistas (usando SVG para forma de ala) */
+        /* Alas ultra detalladas con SVG */
         .wing {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             background: none;
-            animation: flapAdvanced 1.2s infinite alternate ease-in-out;
+            animation: flapUltra 1.5s infinite alternate cubic-bezier(0.42, 0, 0.58, 1);
             z-index: -1;
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.2));
         }
 
         .wing svg {
             fill: #fce4ec;
             stroke: #ec407a;
-            stroke-width: 2;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            stroke-width: 3;
+            stroke-linejoin: round;
         }
 
-        .wing-top-left { top: -40px; left: -40px; transform: rotate(-45deg); }
-        .wing-top-right { top: -40px; right: -40px; transform: rotate(45deg); }
-        .wing-bottom-left { bottom: -40px; left: -40px; transform: rotate(45deg); }
-        .wing-bottom-right { bottom: -40px; right: -40px; transform: rotate(-45deg); }
+        .wing-top-left { top: -50px; left: -50px; transform: rotate(-60deg); }
+        .wing-top-right { top: -50px; right: -50px; transform: rotate(60deg); }
+        .wing-bottom-left { bottom: -50px; left: -50px; transform: rotate(60deg); }
+        .wing-bottom-right { bottom: -50px; right: -50px; transform: rotate(-60deg); }
 
-        @keyframes flapAdvanced {
-            0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(30deg); }
+        @keyframes flapUltra {
+            0% { transform: scale(1) rotate(0deg) translateZ(0); }
+            100% { transform: scale(1.15) rotate(40deg) translateZ(20px); }
         }
 
-        /* Contenido interior */
+        /* Contenido interior con zoom cámara ultra */
         #content {
             display: none;
             position: fixed;
@@ -168,82 +175,90 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #fce4ec;
-            padding: 40px;
+            background: radial-gradient(circle, #fce4ec, #ffebee); /* Gradiente para interior realista */
+            padding: 50px;
             box-sizing: border-box;
             overflow-y: auto;
             text-align: center;
             transform-style: preserve-3d;
-            perspective: 1500px;
-            animation: zoomInCamera 2s ease-in-out forwards;
+            perspective: 2000px;
+            animation: zoomInUltra 2.5s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
             z-index: 20;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2); /* Sombra interna para profundidad */
         }
 
-        @keyframes zoomInCamera {
-            0% { transform: scale(0.1) translateZ(-1000px) rotateX(45deg); opacity: 0; }
-            100% { transform: scale(1) translateZ(0) rotateX(0deg); opacity: 1; }
+        @keyframes zoomInUltra {
+            0% { transform: scale(0.05) translateZ(-1500px) rotateX(60deg) rotateY(30deg); opacity: 0; }
+            60% { transform: scale(1.1) translateZ(-200px) rotateX(10deg) rotateY(5deg); opacity: 1; }
+            100% { transform: scale(1) translateZ(0) rotateX(0deg) rotateY(0deg); opacity: 1; }
         }
 
+        /* Ramo de tulipanes realistas con SVG */
         #bouquet {
-            width: 250px;
-            height: 250px;
-            margin: 0 auto 30px;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
             position: relative;
             transform-style: preserve-3d;
-            animation: bloomAdvanced 4s ease-in forwards;
+            animation: bloomUltra 5s ease-in forwards;
         }
 
         .tulip {
             position: absolute;
-            bottom: 50px;
-            left: 50%;
-            transform: translateX(-50%) translateZ(0);
-            width: 60px;
-            height: 120px;
-            background: linear-gradient(to bottom, #ff4081 60%, #66bb6a 40%);
-            clip-path: path('M30 0 C10 20, 10 60, 30 120 C50 60, 50 20, 30 0');
-            animation: growFlexible 1.5s ease-in-out forwards;
+            bottom: 60px;
+            width: 80px;
+            height: 160px;
+            animation: growUltra 2s ease-in-out forwards;
             opacity: 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transform-origin: bottom;
         }
 
-        .tulip:nth-child(1) { left: 35%; animation-delay: 0.6s; transform: rotate(-15deg); }
-        .tulip:nth-child(2) { left: 45%; animation-delay: 1.2s; transform: rotate(-5deg); }
-        .tulip:nth-child(3) { left: 55%; animation-delay: 1.8s; transform: rotate(5deg); }
-        .tulip:nth-child(4) { left: 65%; animation-delay: 2.4s; transform: rotate(15deg); }
-        .tulip:nth-child(5) { left: 50%; animation-delay: 3s; transform: rotate(0deg); }
-
-        @keyframes growFlexible {
-            0% { height: 0; opacity: 0; transform: translateY(150px) scale(0.5); }
-            60% { height: 140px; opacity: 1; transform: translateY(0) scale(1.1); }
-            100% { height: 120px; opacity: 1; transform: translateY(0) scale(1); }
+        .tulip svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
         }
 
-        @keyframes bloomAdvanced {
-            0% { opacity: 0; transform: rotateY(90deg); }
-            100% { opacity: 1; transform: rotateY(0deg); }
+        .tulip:nth-child(1) { left: 30%; animation-delay: 0.8s; transform: rotate(-20deg); }
+        .tulip:nth-child(2) { left: 40%; animation-delay: 1.6s; transform: rotate(-10deg); }
+        .tulip:nth-child(3) { left: 50%; animation-delay: 2.4s; transform: rotate(0deg); }
+        .tulip:nth-child(4) { left: 60%; animation-delay: 3.2s; transform: rotate(10deg); }
+        .tulip:nth-child(5) { left: 70%; animation-delay: 4s; transform: rotate(20deg); }
+
+        @keyframes growUltra {
+            0% { height: 0; opacity: 0; transform: translateY(200px) scale(0.3) rotate(0deg); }
+            50% { height: 180px; opacity: 1; transform: translateY(0) scale(1.2) rotate(5deg); }
+            100% { height: 160px; opacity: 1; transform: translateY(0) scale(1) rotate(0deg); }
+        }
+
+        @keyframes bloomUltra {
+            0% { opacity: 0; transform: rotateY(180deg) translateZ(-100px); }
+            100% { opacity: 1; transform: rotateY(0deg) translateZ(0); }
         }
 
         #message {
-            font-size: 20px;
+            font-size: 22px;
             color: #880e4f;
-            line-height: 1.6;
-            max-width: 800px;
+            line-height: 1.7;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 30px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
             overflow-y: auto;
-            max-height: 50vh;
+            max-height: 60vh;
+            transform-style: preserve-3d;
+            transform: translateZ(50px); /* Profundidad 3D */
         }
 
         #signature {
-            margin-top: 30px;
+            margin-top: 40px;
             font-style: italic;
-            font-size: 24px;
+            font-size: 28px;
             color: #d81b60;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+            transform: translateZ(30px);
         }
     </style>
 </head>
@@ -257,25 +272,50 @@
             <div id="flap"></div>
         </div>
         <div class="wing wing-top-left">
-            <svg viewBox="0 0 100 100"><path d="M50 10 C20 30, 10 70, 50 90 C90 70, 80 30, 50 10" /></svg>
+            <svg viewBox="0 0 100 100"><path d="M50 0 C15 20, 0 60, 50 100 C100 60, 85 20, 50 0 Z" /></svg>
         </div>
         <div class="wing wing-top-right">
-            <svg viewBox="0 0 100 100"><path d="M50 10 C20 30, 10 70, 50 90 C90 70, 80 30, 50 10" /></svg>
+            <svg viewBox="0 0 100 100"><path d="M50 0 C15 20, 0 60, 50 100 C100 60, 85 20, 50 0 Z" /></svg>
         </div>
         <div class="wing wing-bottom-left">
-            <svg viewBox="0 0 100 100"><path d="M50 10 C20 30, 10 70, 50 90 C90 70, 80 30, 50 10" /></svg>
+            <svg viewBox="0 0 100 100"><path d="M50 0 C15 20, 0 60, 50 100 C100 60, 85 20, 50 0 Z" /></svg>
         </div>
         <div class="wing wing-bottom-right">
-            <svg viewBox="0 0 100 100"><path d="M50 10 C20 30, 10 70, 50 90 C90 70, 80 30, 50 10" /></svg>
+            <svg viewBox="0 0 100 100"><path d="M50 0 C15 20, 0 60, 50 100 C100 60, 85 20, 50 0 Z" /></svg>
         </div>
     </div>
     <div id="content">
         <div id="bouquet">
-            <div class="tulip"></div>
-            <div class="tulip"></div>
-            <div class="tulip"></div>
-            <div class="tulip"></div>
-            <div class="tulip"></div>
+            <div class="tulip">
+                <svg viewBox="0 0 100 200">
+                    <path fill="#ff4081" d="M50 20 C20 50, 10 120, 50 180 C90 120, 80 50, 50 20 Z" /> <!-- Pétalos -->
+                    <rect fill="#66bb6a" x="40" y="180" width="20" height="20" /> <!-- Tallo -->
+                </svg>
+            </div>
+            <div class="tulip">
+                <svg viewBox="0 0 100 200">
+                    <path fill="#ff4081" d="M50 20 C20 50, 10 120, 50 180 C90 120, 80 50, 50 20 Z" />
+                    <rect fill="#66bb6a" x="40" y="180" width="20" height="20" />
+                </svg>
+            </div>
+            <div class="tulip">
+                <svg viewBox="0 0 100 200">
+                    <path fill="#ff4081" d="M50 20 C20 50, 10 120, 50 180 C90 120, 80 50, 50 20 Z" />
+                    <rect fill="#66bb6a" x="40" y="180" width="20" height="20" />
+                </svg>
+            </div>
+            <div class="tulip">
+                <svg viewBox="0 0 100 200">
+                    <path fill="#ff4081" d="M50 20 C20 50, 10 120, 50 180 C90 120, 80 50, 50 20 Z" />
+                    <rect fill="#66bb6a" x="40" y="180" width="20" height="20" />
+                </svg>
+            </div>
+            <div class="tulip">
+                <svg viewBox="0 0 100 200">
+                    <path fill="#ff4081" d="M50 20 C20 50, 10 120, 50 180 C90 120, 80 50, 50 20 Z" />
+                    <rect fill="#66bb6a" x="40" y="180" width="20" height="20" />
+                </svg>
+            </div>
         </div>
         <div id="message">
             Han pasado 5 meses desde que nuestras vidas se unieron, y cada día confirmo que eres el hombre de mi vida 💖. Estás en cada pensamiento y en cada latido de mi corazón. Tu presencia es como un rayo de sol que ilumina mis días y me hace sentir que todo es posible ☀️❤️.<br><br>
@@ -288,48 +328,47 @@
     <audio id="music" src="musica.mp3" loop></audio>
 
     <script>
-        // Generar corazones de fondo (más variados)
+        // Generar corazones de fondo ultra
         const heartsBg = document.querySelector('.hearts-background');
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 40; i++) {
             const heart = document.createElement('div');
             heart.classList.add('heart');
-            heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💖';
+            heart.innerHTML = ['❤️', '💖', '💕', '💞'][Math.floor(Math.random() * 4)];
             heart.style.left = `${Math.random() * 100}%`;
             heart.style.top = `${Math.random() * 100}%`;
-            heart.style.animationDelay = `${Math.random() * 10}s`;
-            heart.style.animationDuration = `${10 + Math.random() * 10}s`;
+            heart.style.animationDelay = `${Math.random() * 15}s`;
+            heart.style.animationDuration = `${12 + Math.random() * 12}s`;
             heartsBg.appendChild(heart);
         }
 
-        // Generar corazones cayendo (más densos y variados)
+        // Generar corazones cayendo ultra
         function createFallingHeart() {
             const fallingHeart = document.createElement('div');
             fallingHeart.classList.add('falling-heart');
-            fallingHeart.innerHTML = Math.random() > 0.5 ? '💕' : '💞';
+            fallingHeart.innerHTML = ['💖', '💕', '💞', '❤️'][Math.floor(Math.random() * 4)];
             fallingHeart.style.left = `${Math.random() * 100}%`;
-            fallingHeart.style.animationDuration = `${3 + Math.random() * 4}s`;
-            fallingHeart.style.fontSize = `${20 + Math.random() * 20}px`;
-            fallingHeart.style.animationDelay = `${Math.random() * 2}s`;
+            fallingHeart.style.animationDuration = `${4 + Math.random() * 5}s`;
+            fallingHeart.style.fontSize = `${25 + Math.random() * 25}px`;
+            fallingHeart.style.animationDelay = `${Math.random() * 3}s`;
             document.body.appendChild(fallingHeart);
-            setTimeout(() => fallingHeart.remove(), 7000);
+            setTimeout(() => fallingHeart.remove(), 9000);
         }
-        setInterval(createFallingHeart, 300);
+        setInterval(createFallingHeart, 200);
 
-        // Interacción con el sobre
+        // Interacción con el sobre ultra
         const envelopeContainer = document.getElementById('envelope-container');
-        const envelope = document.getElementById('envelope');
         const flap = document.getElementById('flap');
         const content = document.getElementById('content');
         const music = document.getElementById('music');
 
         envelopeContainer.addEventListener('click', () => {
-            flap.style.transform = 'rotateX(-180deg)'; // Abre el flap suavemente
+            flap.style.transform = 'rotateX(180deg)'; // Abre el flap hacia arriba (simulando apertura real)
             setTimeout(() => {
                 content.style.display = 'block';
                 music.currentTime = 0;
                 music.play();
-                envelopeContainer.style.display = 'none'; // Oculta el sobre después de abrir
-            }, 1200); // Espera a que el flap se abra
+                envelopeContainer.style.display = 'none'; // Oculta el sobre para "entrar"
+            }, 1500); // Delay para ver la apertura
         });
     </script>
 </body>
